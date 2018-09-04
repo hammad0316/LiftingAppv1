@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -15,48 +14,45 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/lifts.json")
+    fetch('http://localhost:3000/api/v1/lifts.json')
       .then(response => {
         return response.json();
       })
-      .then(lift=> {
+      .then(data => {
         this.setState({
-          lifts: lift
+          lifts: data.lifts,
+          muscleGroups: data.muscle_groups
         });
-      })
-      .then(muscleGroup=> {
-        this.setState({
-          muscleGroups: muscleGroup
-        });
-      })
+      });
   }
 
   renderMuscleGroups() {
     return (
       <Fragment>
         {this.state.muscleGroups.map(muscleGroup => {
-            <div key={muscleGroup.id}>
-              <h3>{muscleGroup.name}</h3>
-              <h5>{muscleGroup.area}</h5>
-            </div>
+          <div key={muscleGroup.id}>
+            <h3>{muscleGroup.name}</h3>
+            <h5>{muscleGroup.area}</h5>
+          </div>;
         })}
       </Fragment>
-    )
-  };
+    );
+  }
 
   renderLifts() {
     return (
       <Fragment>
-      {this.state.lifts.map(lift => {
-        return (
-          <div key={lift.id}>
-            <h3>{lift.name}</h3>
-            {lift.muscle_groups.map(mg => (
-              <li key={mg}>{mg}</li>
-            ))}
-          </div>
-        );
-      })};
+        {this.state.lifts.map(lift => {
+          return (
+            <div key={lift.id}>
+              <h3>{lift.name}</h3>
+              {lift.muscle_groups.map(mg => (
+                <li key={mg}>{mg}</li>
+              ))}
+            </div>
+          );
+        })}
+        ;
       </Fragment>
     );
   }
@@ -88,20 +84,23 @@ class App extends Component {
   }
 
   render() {
-    return(
+    return (
       <Fragment>
-        {<table className="table">
-          <thead className="thead-dark">
-            <th>Lift Name</th>
-            <th>Muscle Groups</th>
-            <th>Weight Put Up</th>
-            <th>Reps</th>
-            <th />
-          </thead>
-          {this.renderRows()}
-        </table>
+        {
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+                <th>Lift Name</th>
+                <th>Muscle Groups</th>
+                <th>Weight Put Up</th>
+                <th>Reps</th>
+              </tr>
+            </thead>
+            {this.renderRows()}
+          </table>
         }
-      </Fragment>);
+      </Fragment>
+    );
   }
 }
 
