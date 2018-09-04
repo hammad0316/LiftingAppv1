@@ -11,8 +11,6 @@ module Api::V1
 
           @muscleGroups = MuscleGroup.all
 
-          logger.debug @lifts
-
           render :json => {:lifts => @lifts,
                            :muscle_groups => @muscleGroups}
 
