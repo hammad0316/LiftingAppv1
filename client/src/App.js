@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   renderMuscleGroups() {
-    console.log(this.state.muscleGroups);
     return (
       <Fragment>
         {this.state.muscleGroups.map(muscleGroup => (
@@ -99,6 +98,7 @@ class App extends Component {
                 <th>Muscle Groups</th>
                 <th>Weight Put Up</th>
                 <th>Reps</th>
+                <th />
               </tr>
             </thead>
             {this.renderRows()}
