@@ -5,6 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       lifts: [],
       muscleGroups: []
     };
@@ -21,20 +22,22 @@ class App extends Component {
       .then(data => {
         this.setState({
           lifts: data.lifts,
-          muscleGroups: data.muscle_groups
+          muscleGroups: data.muscle_groups,
+          loading: false
         });
       });
   }
 
   renderMuscleGroups() {
+    console.log(this.state.muscleGroups);
     return (
       <Fragment>
-        {this.state.muscleGroups.map(muscleGroup => {
+        {this.state.muscleGroups.map(muscleGroup => (
           <div key={muscleGroup.id}>
             <h3>{muscleGroup.name}</h3>
             <h5>{muscleGroup.area}</h5>
-          </div>;
-        })}
+          </div>
+        ))}
       </Fragment>
     );
   }
@@ -86,7 +89,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        {
+        {this.state.loading ? (
+          <h3>Loading...</h3>
+        ) : (
           <table className="table">
             <thead className="thead-dark">
               <tr>
@@ -98,7 +103,7 @@ class App extends Component {
             </thead>
             {this.renderRows()}
           </table>
-        }
+        )}
       </Fragment>
     );
   }
