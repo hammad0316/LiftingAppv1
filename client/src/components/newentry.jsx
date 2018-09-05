@@ -4,15 +4,37 @@ class NewEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lifts: this.props.lifts
+      lifts: this.props.lifts,
+      user: this.props.user,
+      select: "",
+      weight: 0,
+      reps: 0
     };
+
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleWeightChange = this.handleWeightChange.bind(this);
+    this.handleRepsChange = this.handleRepsChange.bind(this);
+  }
+
+  handleSelectChange(e) {
+    this.setState({ select: e.target.value });
+  }
+
+  handleWeightChange(e) {
+    this.setState({ weight: e.target.value });
+  }
+
+  handleRepsChange(e) {
+    this.setState({ reps: e.target.value });
   }
 
   renderSelect() {
     return (
       <Fragment>
         {this.state.lifts.map(lift => (
-          <option value={lift.name}>{lift.name}</option>
+          <option key={lift.id} value={lift.name}>
+            {lift.name}
+          </option>
         ))}
         ;
       </Fragment>
@@ -23,16 +45,37 @@ class NewEntry extends Component {
     let formFields = {};
     return (
       <form>
-        <select name="Lift">{this.renderSelect()}</select>
+        <select
+          name="Lift"
+          onChange={this.handleSelectChange}
+          value={this.state.select}
+        >
+          {this.renderSelect()}
+        </select>
         <input
-          ref={input => (formFields.name = input)}
-          placeHolder="Amount of weight"
+          onChange={this.handleWeightChange}
+          value={this.state.weight}
+          type="number"
+          placeholder="Amount of weight"
         />
         <input
-          ref={input => (formFields.name = input)}
-          placeHolder="Total Reps"
+          onChange={this.handleRepsChange}
+          value={this.state.reps}
+          type="number"
+          placeholder="Total Reps"
         />
-        <button>Submit</button>
+        <button
+          onClick={e => {
+            e.preventDefault();
+            this.props.handleFormSubmit(this.state.user, {
+              lift: this.state.select,
+              weight: this.state.weight,
+              reps: this.state.reps
+            });
+          }}
+        >
+          Submit
+        </button>
       </form>
     );
   }

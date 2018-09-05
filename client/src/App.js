@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
 import HomePage from "./pages/homepage";
@@ -11,7 +11,7 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/table" component={Table} />}
+          <Route exact path="/table" component={Table} />
         </div>
       </Router>
     );

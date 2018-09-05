@@ -21,7 +21,7 @@ module Api::V1
               user.lifts.map! do |userLift|
                 userLift = UserLift.find(userLift)
                 name = Lift.find(userLift.lift).name
-                lift = { "lift": name, "weight": userLift.weight, "reps": userLift.reps }
+                lift = { "id": userLift.id, "name": name, "weight": userLift.weight, "reps": userLift.reps }
                 lift
               end
           end
@@ -34,18 +34,23 @@ module Api::V1
       end
 
       def create
-        @lift = Lift.create(lift_params)
-        render json: lift
+        userId = request.raw_post["userId"]
+        liftData = request.raw_post["liftData"]
+        logger.debug userId
+        logger.debug liftData
+
+        # @lift = UserLift.create(lift_params)
+        # render json: lift
       end
 
       def destroy
-        Lift.destroy(params[:id])
+        UserLift.destroy(params[:id])
       end
 
       def update
         @lift = Lift.find(params[:id])
         lift.update_attributes(fruit_params)
-        render json: fruit
+        render json: lift
       end
 
       def show

@@ -7,12 +7,16 @@ class Table extends Component {
     this.state = {
       loading: true,
       lifts: [],
-      muscleGroups: []
+      muscleGroups: [],
+      users: []
     };
     this.renderMuscleGroups = this.renderMuscleGroups.bind(this);
     this.renderLifts = this.renderLifts.bind(this);
     this.renderRows = this.renderRows.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.deleteLift = this.deleteLift.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.addNewLift = this.addNewLift.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +28,7 @@ class Table extends Component {
         this.setState({
           lifts: data.lifts,
           muscleGroups: data.muscle_groups,
+          users: data.users,
           loading: false
         });
       });
@@ -36,7 +41,21 @@ class Table extends Component {
         "Content-Type": "application/json"
       }
     });
-    console.log(id);
+
+    this.deleteLift(id);
+  }
+
+  deleteLift(id) {
+    const newUsers = this.state.users.map(user => {
+      user.lifts.filter(lift => lift.id !== id);
+      return user;
+    });
+
+    console.log(newUsers);
+
+    // this.setState({
+    //   lifts: newLifts
+    // });
   }
 
   renderMuscleGroups() {
@@ -70,21 +89,22 @@ class Table extends Component {
     );
   }
 
-  renderRows() {
+  renderRows(user) {
     return (
       <Fragment>
-        {this.state.lifts.map(lift => {
+        {user.lifts.map(lift => {
           return (
-            <tbody key={lift.id}>
+            <tbody key={lift.name}>
               <tr>
                 <td>{lift.name}</td>
                 <td>
-                  {lift.muscle_groups.map(mg => (
+                  to do: muscle groups
+                  {/* {lift.muscle_groups.map(mg => (
                     <li key={mg}>{mg}</li>
-                  ))}
+                  ))} */}
                 </td>
-                <td>0</td>
-                <td>0</td>
+                <td>{lift.weight}</td>
+                <td>{lift.reps}</td>
                 <td>
                   <button>Edit</button>
                   <button onClick={() => this.handleDelete(lift.id)}>
@@ -99,27 +119,74 @@ class Table extends Component {
     );
   }
 
+  handleFormSubmit(userId, liftData) {
+    let lift = JSON.stringify({ userId, liftData });
+
+    fetch(`/api/v1/lifts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: lift
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(lift => {
+        this.addNewLift(lift);
+      });
+  }
+
+  addNewLift() {}
+
+  renderTable(user) {
+    const rows =
+      user.lifts.length > 0 ? (
+        this.renderRows(user)
+      ) : (
+        <tbody>
+          <tr>
+            <td>No data</td>
+          </tr>
+        </tbody>
+      );
+
+    return (
+      <div key={user.id}>
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th>Lift Name</th>
+              <th>Muscle Groups</th>
+              <th>Weight Put Up</th>
+              <th>Reps</th>
+              <th />
+            </tr>
+          </thead>
+          {rows}
+        </table>
+        <NewEntry
+          lifts={this.state.lifts}
+          user={user.id}
+          handleFormSubmit={this.handleFormSubmit}
+        />
+        <br />
+        <br />
+      </div>
+    );
+  }
+
   render() {
+    console.log(this.state.users);
+
     return (
       <Fragment>
         {this.state.loading ? (
           <h3>Loading...</h3>
         ) : (
-          <div>
-            <table className="table">
-              <thead className="thead-dark">
-                <tr>
-                  <th>Lift Name</th>
-                  <th>Muscle Groups</th>
-                  <th>Weight Put Up</th>
-                  <th>Reps</th>
-                  <th />
-                </tr>
-              </thead>
-              {this.renderRows()}
-            </table>
-            <NewEntry lifts={this.state.lifts} />
-          </div>
+          <Fragment>
+            {this.state.users.map(user => this.renderTable(user))}
+          </Fragment>
         )}
       </Fragment>
     );
