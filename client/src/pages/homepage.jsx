@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import Table from "./pages/table";
+import Table from "./table";
 
 class HomePage extends Component {
   render() {

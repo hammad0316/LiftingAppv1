@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import NewEntry from "../components/newentry";
 
 class Table extends Component {
   constructor(props) {
@@ -11,10 +12,11 @@ class Table extends Component {
     this.renderMuscleGroups = this.renderMuscleGroups.bind(this);
     this.renderLifts = this.renderLifts.bind(this);
     this.renderRows = this.renderRows.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/lifts.json")
+    fetch(`/api/v1/lifts.json`)
       .then(response => {
         return response.json();
       })
@@ -25,6 +27,16 @@ class Table extends Component {
           loading: false
         });
       });
+  }
+
+  handleDelete(id) {
+    fetch(`/api/v1/lifts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log(id);
   }
 
   renderMuscleGroups() {
@@ -74,7 +86,10 @@ class Table extends Component {
                 <td>0</td>
                 <td>0</td>
                 <td>
-                  <button>Edit</button> <button>Delete</button>{" "}
+                  <button>Edit</button>
+                  <button onClick={() => this.handleDelete(lift.id)}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -90,18 +105,21 @@ class Table extends Component {
         {this.state.loading ? (
           <h3>Loading...</h3>
         ) : (
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th>Lift Name</th>
-                <th>Muscle Groups</th>
-                <th>Weight Put Up</th>
-                <th>Reps</th>
-                <th />
-              </tr>
-            </thead>
-            {this.renderRows()}
-          </table>
+          <div>
+            <table className="table">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Lift Name</th>
+                  <th>Muscle Groups</th>
+                  <th>Weight Put Up</th>
+                  <th>Reps</th>
+                  <th />
+                </tr>
+              </thead>
+              {this.renderRows()}
+            </table>
+            <NewEntry lifts={this.state.lifts} />
+          </div>
         )}
       </Fragment>
     );

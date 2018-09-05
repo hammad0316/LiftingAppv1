@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get 'lifts/new'
   get 'lifts/edit'
   get 'lifts/show'
-  resources :lifts
-  resources :muscle_group
   namespace :api do
     namespace :v1 do
       resources :lifts
