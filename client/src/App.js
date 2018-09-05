@@ -7,6 +7,8 @@ import Table from "./pages/table";
 
 class App extends Component {
   render() {
+    console.log("Users:", this.state.users);
+
     return (
       <Router>
         <div>
