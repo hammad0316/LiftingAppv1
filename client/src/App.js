@@ -7,7 +7,8 @@ class App extends Component {
     this.state = {
       loading: true,
       lifts: [],
-      muscleGroups: []
+      muscleGroups: [],
+      users: []
     };
     this.renderMuscleGroups = this.renderMuscleGroups.bind(this);
     this.renderLifts = this.renderLifts.bind(this);
@@ -23,13 +24,13 @@ class App extends Component {
         this.setState({
           lifts: data.lifts,
           muscleGroups: data.muscle_groups,
+          users: data.users,
           loading: false
         });
       });
   }
 
   renderMuscleGroups() {
-    console.log(this.state.muscleGroups);
     return (
       <Fragment>
         {this.state.muscleGroups.map(muscleGroup => (
@@ -49,8 +50,8 @@ class App extends Component {
           return (
             <div key={lift.id}>
               <h3>{lift.name}</h3>
-              {lift.muscle_groups.map(mg => (
-                <li key={mg}>{mg}</li>
+              {lift.muscle_groups.map(muscleGroup => (
+                <li key={muscleGroup}>{muscleGroup}</li>
               ))}
             </div>
           );
@@ -87,6 +88,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('Users:', this.state.users);
+
     return (
       <Fragment>
         {this.state.loading ? (
@@ -99,6 +102,7 @@ class App extends Component {
                 <th>Muscle Groups</th>
                 <th>Weight Put Up</th>
                 <th>Reps</th>
+                <th />
               </tr>
             </thead>
             {this.renderRows()}
