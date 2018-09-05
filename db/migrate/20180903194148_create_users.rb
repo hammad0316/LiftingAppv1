@@ -5,7 +5,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password
       t.integer :lifts, array:true, default:[]
       t.string :email
-      t.json :onerepmax
 
       t.timestamps
     end
