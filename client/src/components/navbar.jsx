@@ -8,7 +8,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Navbar
+          LiftingApp
         </Link>
         <button
           className="navbar-toggler"

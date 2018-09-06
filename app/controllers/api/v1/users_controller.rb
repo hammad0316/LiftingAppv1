@@ -9,11 +9,11 @@ module Api::V1
         def create 
             @user = User.create(email: params[:data][:user][:email], username: params[:data][:user][:username], password: params[:data][:user][:password])
             render :create
-         end
+        end
 
-    private
-    def fruit_params
-        params.require(:email).permit(:username, :password)
+        private
+        def fruit_params
+            params.require(:email).permit(:username, :password)
+        end
     end
-end
 end
