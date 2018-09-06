@@ -42,7 +42,6 @@ class NewEntry extends Component {
   }
 
   render() {
-    let formFields = {};
     return (
       <form>
         <select

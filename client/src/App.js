@@ -8,6 +8,7 @@ import HomePage from "./pages/homepage";
 import Login from "./pages/login";
 import Table from "./pages/table";
 import RegisterForm from "./pages/registerform";
+import Graphs from "./pages/graphing";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/table" component={Table} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={RegisterForm} />
+          <Route exact path="/graphs" component={Graphs} />
         </div>
       </Router>
     );
