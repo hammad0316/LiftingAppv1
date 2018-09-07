@@ -2,6 +2,8 @@
 
 This README contains the versions best compatible and steps that are necessary to get the application up and running.
 
+Application is implemented using Ruby on Rails as an API for the backend, and create-react-app for the frontend.
+
 Versions:
 
     - Ruby: 2.4.1
