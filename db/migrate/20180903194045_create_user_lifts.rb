@@ -4,7 +4,7 @@ class CreateUserLifts < ActiveRecord::Migration[5.2]
       t.integer :lift
       t.integer :weight
       t.integer :reps
-      t.integer :userid
+      t.integer :user
       t.integer :workoutid
 
       t.timestamps

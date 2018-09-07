@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 2018_09_07_014207) do
   end
 
   create_table "user_lifts", force: :cascade do |t|
-    t.integer "lifts"
+    t.integer "lift"
     t.integer "weight"
     t.integer "reps"
-    t.integer "userid"
+    t.integer "user"
     t.integer "workoutid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_014207) do
   end
 
   create_table "workouts", force: :cascade do |t|
+    t.integer "userid"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", null: false
