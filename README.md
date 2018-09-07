@@ -10,6 +10,10 @@ Versions:
     
     - Postgresql: 10.5
     
+    - Yarn: 1.9.4
+    
+    - npm: 5.6.0
+    
 How to run:
 
     1) Run bundle install in root folder 
