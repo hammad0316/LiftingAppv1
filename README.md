@@ -26,6 +26,6 @@ How to run:
     
     7) To start both back end and front end run 'rake start' in root folder
     
-    8) Back end will be at http://localhost.com:3001
+    8) Back end will be at http://localhost:3001
     
-    9) Front end will be at http://localhost.com:3000
+    9) Front end will be at http://localhost:3000
