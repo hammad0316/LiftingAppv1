@@ -2,10 +2,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :username
-      t.string :password
-      t.integer :lifts, array:true, default:[]
+      t.string :password_digest
       t.string :email
       t.json :onerepmax
+      t.integer :workout
 
       t.timestamps
     end

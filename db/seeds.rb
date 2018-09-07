@@ -13,16 +13,22 @@ MuscleGroup.destroy_all
 biceps = MuscleGroup.create name: 'Biceps', area: 'upper'
 triceps = MuscleGroup.create name: 'Triceps', area: 'upper'
 chest = MuscleGroup.create name: 'Chest', area: 'upper'
-MuscleGroup.create name: 'Quadriceps', area: 'lower'
+quads = MuscleGroup.create name: 'Quadriceps', area: 'lower'
+hamstrings = MuscleGroup.create name: 'Hamstrings', area: 'lower'
+glutes = MuscleGroup.create name: 'Glutes', area: 'lower'
+
 
 Lift.destroy_all
 
 benchpress = Lift.create name: 'Bench Press', muscle_groups: [chest.id, triceps.id]
 hammercurl = Lift.create name: 'Hammer Curl', muscle_groups: [biceps.id]
+squats = Lift.create name: 'Squats', muscle_groups: [quads.id, hamstring.id, glutes.id]
 
 UserLift.destroy_all
 
 lift1 = UserLift.create lift: benchpress.id, weight: 225, reps: 5
+lift2 = UserLift.create lift: hammercurl.id, weight: 40, reps: 5
+lift3 = UserLift.create lift: squat.id, weight: 225, reps: 5
 
 User.destroy_all
 
