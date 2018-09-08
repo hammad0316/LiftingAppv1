@@ -30,26 +30,28 @@ counter = 1;
 
 User.destroy_all
 UserLift.destroy_all
+Workout.destroy_all
 
-while counter < 20 do
+while counter <= 20 do
   username = names.sample + counter.to_s
   benchMax = (Random.rand(3) + 7) * 25
   hammercurlMax = (Random.rand(3) + 7) * 25
   newUser = User.create username: username, password_digest: 'password', email: username + '@email.com',
     onerepmax: [{"lift": benchpress.id, "max": benchMax}, {"lift": hammercurl.id, "max": hammercurlMax}]
-
-  liftCounter = 0
-  while liftCounter < 20 do
-    
-    liftsArr.each do |lift|
-      weightLifted = Random.rand(8) * 25
-      repsDone = Random.rand(9) + 3
-      UserLift.create lift: lift.id, weight: weightLifted, reps: repsDone, user: newUser.id
+    liftCounter = 0
+    workOutCounter = 0
+    workOut = Workout.create userid: newUser.id
+    while workOutCounter <= 10 do 
+        while liftCounter <= 20 do
+          liftsArr.each do |lift|
+            weightLifted = Random.rand(8) * 25
+            repsDone = Random.rand(9) + 3
+            UserLift.create lift: lift.id, weight: weightLifted, reps: repsDone, user: newUser.id, workoutid: workOut.id
+          end
+          liftCounter  = liftCounter + 1
+        end
+      workOutCounter = workOutCounter + 1
     end
-    
-    liftCounter  = liftCounter + 1
-  end
-
   counter = counter + 1
 end
 

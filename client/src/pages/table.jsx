@@ -20,7 +20,7 @@ class Table extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/lifts.json`)
+    fetch(`/api/v1/user_lifts/`)
       .then(response => {
         return response.json();
       })
@@ -35,7 +35,7 @@ class Table extends Component {
   }
 
   handleDelete(id) {
-    fetch(`/api/v1/lifts/${id}`, {
+    fetch(`/api/v1/user_lifts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
