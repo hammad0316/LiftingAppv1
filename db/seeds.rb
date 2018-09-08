@@ -40,9 +40,9 @@ while counter <= 20 do
     onerepmax: [{"lift": benchpress.id, "max": benchMax}, {"lift": hammercurl.id, "max": hammercurlMax}]
     liftCounter = 0
     workOutCounter = 0
-    workOut = Workout.create userid: newUser.id
     while workOutCounter <= 10 do 
-        while liftCounter <= 20 do
+      while liftCounter <= 20 do
+        workOut = Workout.create userid: newUser.id
           liftsArr.each do |lift|
             weightLifted = Random.rand(8) * 25
             repsDone = Random.rand(9) + 3
