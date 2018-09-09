@@ -10,7 +10,7 @@ module Api::V1
         end
 
         def show 
-            @userLifts = UserLift.where( :workoutid => params[:id])
+            @userLifts = UserLift.where( :user => params[:id])
             render :json => {:userLifts => @userLifts.all}
         end
     end
