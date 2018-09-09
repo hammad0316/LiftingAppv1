@@ -26,9 +26,9 @@ class Table extends Component {
       })
       .then(data => {
         this.setState({
-          lifts: data.lifts,
-          muscleGroups: data.muscle_groups,
-          users: data.users,
+          lifts: data.userLifts.lift,
+          muscleGroups: data.userLifts.muscle_groups,
+          users: data.userLifts,
           loading: false
         });
       });
@@ -177,7 +177,7 @@ class Table extends Component {
   }
 
   render() {
-    console.log(this.state.lifts);
+    console.log(this.state.users.lifts);
 
     return (
       <Fragment>
