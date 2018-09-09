@@ -10,12 +10,7 @@ module Api::V1
         end
 
         def show 
-            @lifts = Lift.where(:id => UserLift.select("lift").where(:user => params[:id]))
-            @lifts.map do |lift|
-                lift.muscle_groups.map! do |muscleGroup|
-                    MuscleGroup.find(muscleGroup).name
-                end
-            end
+            
             @userLifts = UserLift.where( :user => params[:id])
             @user = @userLifts.map do |user|
                     name = Lift.find(user.lift).name

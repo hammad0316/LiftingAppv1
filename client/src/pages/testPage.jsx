@@ -5,10 +5,11 @@ class testPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      userLifts: [],
-      muscleGroups: [],
-      users: []
+      userLifts: []
     };
+    this.renderRows = this.renderRows.bind(this);
+    this.renderTable = this.renderTable.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -26,24 +27,79 @@ class testPage extends Component {
       });
   }
 
-  render() {
+  handleDelete(id) {
+    fetch(`/api/v1/user_lifts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    this.deleteLift(id);
+  }
+
+  renderRows() {
     return (
       <Fragment>
         {this.state.userLifts.map(data => {
           return (
-            <div key={data.id}>
-              <h3>{data.lift}</h3>
-              <p>{data.weight}</p>
-              <p>{data.reps}</p>
-              {data.muscle_groups.map(mg => {
-                return <li key={mg}>{mg}</li>;
-              })}
-            </div>
+            <tbody key={data.id}>
+              <tr>
+                <td>{data.lift}</td>
+                <td>
+                  {data.muscle_groups.map(mg => {
+                    return (
+                      <ul class="list-group">
+                        <li key={mg} className="">
+                          {mg}
+                        </li>
+                      </ul>
+                    );
+                  })}
+                </td>
+                <td>{data.weight}</td>
+                <td>{data.reps}</td>
+                <td>
+                  <button className="btn btn-outline-primary">Edit</button>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => this.handleDelete(data.id)}
+                  >
+                    Delete
+                  </button>
+                  <button className="btn btn-dark">+</button>
+                </td>
+              </tr>
+            </tbody>
           );
         })}
-        ;
       </Fragment>
     );
+  }
+
+  renderTable() {
+    return (
+      <Fragment>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr scope="row">
+              <th>Lift Name</th>
+              <th>Muscle Groups</th>
+              <th>Weight Lifts</th>
+              <th>Reps Done</th>
+              <th />
+            </tr>
+          </thead>
+          {this.renderRows()}
+        </table>
+        <br />
+        <br />
+      </Fragment>
+    );
+  }
+
+  render() {
+    return <Fragment>{this.renderTable()}</Fragment>;
   }
 }
 
