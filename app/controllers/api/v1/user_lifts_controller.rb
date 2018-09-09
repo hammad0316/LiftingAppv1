@@ -11,7 +11,14 @@ module Api::V1
 
         def show 
             @userLifts = UserLift.where( :user => params[:id])
-            render :json => {:userLifts => @userLifts.all}
+
+            # @lifts = Lift.where(:lift => UserLift.where(:user => params[:id]))
+
+            # im trying to return all the lifts and their name as a @lifts variable,
+            # and same with muscle groups and users over all
+
+            render :json => {
+                             :userLifts => @userLifts.all}
         end
     end
 end

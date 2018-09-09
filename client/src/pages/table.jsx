@@ -20,7 +20,7 @@ class Table extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/user_lifts/`)
+    fetch(`/api/v1/user_lifts/202`)
       .then(response => {
         return response.json();
       })

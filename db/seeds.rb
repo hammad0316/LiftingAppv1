@@ -39,23 +39,17 @@ while counter <= 20 do
   newUser = User.create username: username, password_digest: 'password', email: username + '@email.com',
     onerepmax: [{"lift": benchpress.id, "max": benchMax}, {"lift": hammercurl.id, "max": hammercurlMax}]
     newCounter = 0
-    while newCounter <= 10 do
-    liftCounter = 0
     workOutCounter = 0
       while workOutCounter <= 10 do 
         workOut = Workout.create userid: newUser.id
-        while liftCounter <= 20 do
             liftsArr.each do |lift|
               weightLifted = Random.rand(8) * 25
               repsDone = Random.rand(9) + 3
               UserLift.create lift: lift.id, weight: weightLifted, reps: repsDone, user: newUser.id, workoutid: workOut.id
             end
-            liftCounter  = liftCounter + 1
-          end
         workOutCounter = workOutCounter + 1
       end
-      newCounter = newCounter + 1
-    end
+  newCounter = newCounter + 1
   counter = counter + 1
 end
 
