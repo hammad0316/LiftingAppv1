@@ -20,7 +20,7 @@ class Table extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/user_lifts/22`)
+    fetch(`/api/v1/user_lifts/202`)
       .then(response => {
         return response.json();
       })
@@ -177,7 +177,7 @@ class Table extends Component {
   }
 
   render() {
-    console.log(this.state.users);
+    console.log(this.state.lifts);
 
     return (
       <Fragment>

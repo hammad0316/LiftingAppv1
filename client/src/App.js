@@ -10,6 +10,8 @@ import Table from "./pages/table";
 import RegisterForm from "./pages/registerform";
 import Graphs from "./pages/graphing";
 
+import testPage from "./pages/testPage";
+
 class App extends Component {
   render() {
     return (
@@ -22,6 +24,7 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={RegisterForm} />
           <Route exact path="/graphs" component={Graphs} />
+          <Route exact path="/testPage" component={testPage} />
         </div>
       </Router>
     );
