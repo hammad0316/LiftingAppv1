@@ -49,11 +49,9 @@ class testPage extends Component {
                 <td>
                   {data.muscle_groups.map(mg => {
                     return (
-                      <ul class="list-group">
-                        <li key={mg} className="">
-                          {mg}
-                        </li>
-                      </ul>
+                      <li key={mg} className="">
+                        {mg}
+                      </li>
                     );
                   })}
                 </td>
@@ -82,7 +80,7 @@ class testPage extends Component {
       <Fragment>
         <table className="table table-striped">
           <thead className="thead-dark">
-            <tr scope="row">
+            <tr>
               <th>Lift Name</th>
               <th>Muscle Groups</th>
               <th>Weight Lifts</th>
