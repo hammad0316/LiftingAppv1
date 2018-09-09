@@ -5,7 +5,7 @@ class testPage extends Component {
     super(props);
     this.state = {
       loading: true,
-      lifts: [],
+      userLifts: [],
       muscleGroups: [],
       users: []
     };
@@ -18,9 +18,9 @@ class testPage extends Component {
       })
       .then(data => {
         this.setState({
-          lifts: data.lifts,
-          muscleGroups: data.muscle_groups,
-          users: data.users,
+          //   lifts: data.lifts,
+          //   muscleGroups: data.muscle_groups,
+          userLifts: data.userLifts,
           loading: false
         });
       });
@@ -29,11 +29,13 @@ class testPage extends Component {
   render() {
     return (
       <Fragment>
-        {this.state.lifts.map(lift => {
+        {this.state.userLifts.map(data => {
           return (
-            <div key={lift.id}>
-              <h3>{lift.name}</h3>
-              {lift.muscle_groups.map(mg => {
+            <div key={data.id}>
+              <h3>{data.lift}</h3>
+              <p>{data.weight}</p>
+              <p>{data.reps}</p>
+              {data.muscle_groups.map(mg => {
                 return <li key={mg}>{mg}</li>;
               })}
             </div>
