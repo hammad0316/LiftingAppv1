@@ -13,7 +13,7 @@ class testPage extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/user_lifts/202`)
+    fetch(`/api/v1/user_lifts/41`)
       .then(response => {
         return response.json();
       })
@@ -58,10 +58,16 @@ class testPage extends Component {
                 <td>{data.weight}</td>
                 <td>{data.reps}</td>
                 <td>
-                  <button className="btn btn-outline-primary">Edit</button>
+                  <button
+                    className="btn btn-outline-primary"
+                    style={{ marginRight: 10 }}
+                  >
+                    Edit
+                  </button>
                   <button
                     className="btn btn-outline-danger"
                     onClick={() => this.handleDelete(data.id)}
+                    style={{ marginRight: 10 }}
                   >
                     Delete
                   </button>
