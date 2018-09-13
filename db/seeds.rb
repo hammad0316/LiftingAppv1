@@ -43,7 +43,7 @@ while counter <= 20 do
       while workOutCounter <= 10 do 
         workOut = Workout.create userid: newUser.id
             liftsArr.each do |lift|
-              weightLifted = Random.rand(8) * 25
+              weightLifted = Random.rand(8) * 25 + 10
               repsDone = Random.rand(9) + 3
               UserLift.create lift: lift.id, weight: weightLifted, reps: repsDone, user: newUser.id, workoutid: workOut.id
             end

@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_014207) do
     t.string "password_digest"
     t.string "email"
     t.json "onerepmax"
+    t.integer "workout"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

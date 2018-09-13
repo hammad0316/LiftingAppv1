@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 
 class testPage extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class testPage extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/user_lifts/202`)
+    fetch(`/api/v1/user_lifts/149`)
       .then(response => {
         return response.json();
       })
@@ -27,15 +27,24 @@ class testPage extends Component {
       });
   }
 
-  handleDelete(id) {
-    fetch(`/api/v1/user_lifts/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }
+  deleteLift(id) {
+    this.setState({
+      userLifts: this.state.userLifts.filter(lift => lift.id !== id)
     });
+  }
 
-    this.deleteLift(id);
+  handleDelete(id) {
+    const confirmed = window.confirm('Are you sure you want to delete?');
+    if (confirmed) {
+      fetch(`/api/v1/user_lifts/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      this.deleteLift(id);
+    }
   }
 
   renderRows() {
